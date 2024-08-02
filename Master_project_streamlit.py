@@ -1,7 +1,10 @@
 import streamlit as st
-import tensorflow as tf
+import tensorflow as tfd
 import numpy as np
 from PIL import Image
+
+# URL of the .tflite file in your GitHub repository
+url = "https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification.git/master/mobilenetv2_model.tflite"
 
 # Load TFLite model and allocate tensors
 interpreter = tf.lite.Interpreter(model_path="C:\\Users\\Ryan.kelly\\Desktop\\mobilenetv2_model.tflite")
