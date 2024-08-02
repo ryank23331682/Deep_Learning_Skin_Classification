@@ -3,8 +3,21 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 
+# URL of the .tflite file in your GitHub repository
+url = "https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_model.tflite"
+
+# Local path where the model will be saved
+local_path = "mobilenetv2_model.tflite"
+
+# Download the file from the GitHub repository if it does not exist locally
+if not os.path.exists(local_path):
+    response = requests.get(url)
+    response.raise_for_status()  # Ensure the request was successful
+    with open(local_path, 'wb') as f:
+        f.write(response.content)
+
 # Load TFLite model and allocate tensors
-interpreter = tf.lite.Interpreter(model_path="https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_model.tflite")
+interpreter = tf.lite.Interpreter(model_path=local_path)
 interpreter.allocate_tensors()
 
 # Get input and output tensors.
