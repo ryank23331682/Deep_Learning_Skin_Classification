@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 
 # Load TFLite model and allocate tensors
-interpreter = tf.lite.Interpreter(model_path="https://github.com/ryank23331682/Deep_Learning_Skin_Classification/blob/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_model.tflite")
+interpreter = tf.lite.Interpreter(model_path="https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_model.tflite")
 interpreter.allocate_tensors()
 
 # Get input and output tensors.
