@@ -6,10 +6,10 @@ import requests
 import os
 
 # URL of the .tflite file in your GitHub repository
-url = "https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_model.tflite"
+url = "https://raw.githubusercontent.com/ryank23331682/Deep_Learning_Skin_Classification/f62bae1e7ec8cf7a59f52a0f9f0285c5b7263395/mobilenetv2_modelV2.tflite"
 
 # Local path where the model will be saved
-local_path = "mobilenetv2_model.tflite"
+local_path = "mobilenetv2_modelV2.tflite"
 
 # Download the file from the GitHub repository if it does not exist locally
 if not os.path.exists(local_path):
