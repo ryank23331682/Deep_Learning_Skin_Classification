@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import requests
+import pandas as pd
 import os
 
 # URL of the .tflite file in your GitHub repository
