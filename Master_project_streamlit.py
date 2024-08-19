@@ -93,9 +93,15 @@ if uploaded_file is not None:
     class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
     class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
 
-    # Remove index from the DataFrame
-    class_probabilities_df.index = pd.RangeIndex(start=1, stop=len(class_probabilities_df) + 1, step=1)
+    # Map the abbreviations to full words and descriptions
+    class_probabilities_df.index.name = 'Class Abbreviation'
+    class_probabilities_df.reset_index(inplace=True)
+    class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
+    class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
+    
+    # Reorder columns for better readability
+    class_probabilities_df = class_probabilities_df[['Class Abbreviation', 'Full Word', 'Description', 'Probability']]
     
     # Display the class probabilities in a table without index
     st.write("Class Probabilities:")
-    st.dataframe(class_probabilities_df, width=1000, height=400, use_container_width=True)
+    st.write(class_probabilities_df.to_html(index=False), unsafe_allow_html=True)
