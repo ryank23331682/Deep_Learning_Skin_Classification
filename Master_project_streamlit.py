@@ -77,11 +77,10 @@ if uploaded_file is not None:
     # Display the predicted class label
     st.write(f"Predicted Class: {class_label}")
     
-    st.write("Class Probabilities:")
     
     # Convert the class probabilities dictionary to a DataFrame
     class_probabilities_df = pd.DataFrame(list(class_probabilities.items()), columns=['Class Label', 'Probability'])
     
     # Display the class probabilities in a table
     st.write("Class Probabilities:")
-    st.dataframe(class_probabilities_df, width=800, height=400)
+    st.dataframe(class_probabilities_df)
