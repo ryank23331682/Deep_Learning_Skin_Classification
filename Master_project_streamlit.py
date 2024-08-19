@@ -67,8 +67,11 @@ if uploaded_file is not None:
     st.write("Classifying...")
 
     # Predict the image
-    class_label, predictions = predict(image)
-    # Display the predicted class label and raw predictions
+    class_label, class_probabilities = predict(image)
+    # Display the predicted class label
     st.write(f"Predicted Class: {class_label}")
-    st.write("Raw Predictions:")
-    st.write(predictions)
+    st.write("Class Probabilities:")
+    
+    # Display the class probabilities
+    for label, probability in class_probabilities.items():
+        st.write(f"{label}: {probability:.4f}")
