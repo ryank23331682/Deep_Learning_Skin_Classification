@@ -93,6 +93,9 @@ if uploaded_file is not None:
     class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
     class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
     
+    # Convert probabilities to percentages with 2 decimal places
+    class_probabilities_df['Probability'] = (class_probabilities_df['Probability'] * 100).round(2).astype(str) + '%'
+    
     # Reorder columns for better readability
     class_probabilities_df = class_probabilities_df[['Class Abbreviation', 'Full Word', 'Description', 'Probability']]
     
