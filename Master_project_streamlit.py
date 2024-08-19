@@ -45,12 +45,17 @@ def predict(image):
     # The function `get_tensor` returns a copy of the tensor data
     output_data = interpreter.get_tensor(output_details[0]['index'])
 
-    # Get the predicted class index
-    predicted_class_index = np.argmax(output_data[0])
+    # Get the predicted class index and probabilities
+    predicted_probabilities = output_data[0]
+    predicted_class_index = np.argmax(predicted_probabilities)
+    
+    # Create a dictionary of class labels with their corresponding probabilities
+    class_probabilities = {class_labels[i]: predicted_probabilities[i] for i in range(len(class_labels))}
     
     # Get the corresponding class label
     predicted_class_label = class_labels[predicted_class_index]
-    return predicted_class_label, output_data
+    return predicted_class_label, class_probabilities
+
 
 st.title("Deep Learning for Skin Cancer Detection")
 
