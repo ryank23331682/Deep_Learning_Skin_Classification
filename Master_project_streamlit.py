@@ -27,8 +27,16 @@ interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 
-# Define class labels
-class_labels = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+# Define class labels with full words and descriptions
+class_info = {
+    'akiec': {'full_word': 'Actinic Keratosis', 'description': 'A precancerous skin condition characterized by rough, scaly patches on sun-exposed skin.'},
+    'bcc': {'full_word': 'Basal Cell Carcinoma', 'description': 'A type of skin cancer that begins in the basal cells of the skin.'},
+    'bkl': {'full_word': 'Benign Keratosis', 'description': 'A non-cancerous skin growth, often referred to as a seborrheic keratosis.'},
+    'df': {'full_word': 'Dermatofibroma', 'description': 'A common benign skin tumor that is usually firm and raised.'},
+    'mel': {'full_word': 'Melanoma', 'description': 'A serious form of skin cancer that begins in the cells that produce pigment (melanocytes).'},
+    'nv': {'full_word': 'Nevus', 'description': 'A common skin lesion also known as a mole, which can be benign or a precursor to melanoma.'},
+    'vasc': {'full_word': 'Vascular Lesion', 'description': 'A type of skin lesion that involves abnormal blood vessels, such as hemangiomas.'}
+}
 
 def predict(image):
     # Preprocess the image to required size and cast
@@ -75,12 +83,18 @@ if uploaded_file is not None:
     # Predict the image
     class_label, class_probabilities = predict(image)
     # Display the predicted class label
-    st.write(f"Predicted Class: {class_label}")
-    
+    st.write(f"Predicted Class: {class_info[class_label]['full_word']}")
     
     # Convert the class probabilities dictionary to a DataFrame
-    class_probabilities_df = pd.DataFrame(list(class_probabilities.items()), columns=['Class Label', 'Probability'])
+    class_probabilities_df = pd.DataFrame(list(class_probabilities.items()), columns=['Class Abbreviation', 'Probability'])
+    
+    # Map the abbreviations to full words and descriptions
+    class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
+    class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
+
+    # Reorder columns for better readability
+    class_probabilities_df = class_probabilities_df[['Class Abbreviation', 'Full Word', 'Description', 'Probability']]
     
     # Display the class probabilities in a table
     st.write("Class Probabilities:")
-    st.dataframe(class_probabilities_df)
+    st.dataframe(class_probabilities_df, width=800, height=400)
