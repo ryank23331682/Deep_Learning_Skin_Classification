@@ -75,8 +75,12 @@ if uploaded_file is not None:
     class_label, class_probabilities = predict(image)
     # Display the predicted class label
     st.write(f"Predicted Class: {class_label}")
+    
     st.write("Class Probabilities:")
     
-    # Display the class probabilities
-    for label, probability in class_probabilities.items():
-        st.write(f"{label}: {probability:.4f}")
+    # Convert the class probabilities dictionary to a DataFrame
+    class_probabilities_df = pd.DataFrame(list(class_probabilities.items()), columns=['Class Label', 'Probability'])
+    
+    # Display the class probabilities in a table
+    st.write("Class Probabilities:")
+    st.dataframe(class_probabilities_df, width=800, height=400)
