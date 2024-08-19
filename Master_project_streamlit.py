@@ -37,6 +37,7 @@ class_info = {
     'nv': {'full_word': 'Nevus', 'description': 'A common skin lesion also known as a mole, which can be benign or a precursor to melanoma.'},
     'vasc': {'full_word': 'Vascular Lesion', 'description': 'A type of skin lesion that involves abnormal blood vessels, such as hemangiomas.'}
 }
+class_labels = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
 
 def predict(image):
     # Preprocess the image to required size and cast
