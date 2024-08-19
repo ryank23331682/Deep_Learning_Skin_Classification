@@ -98,4 +98,4 @@ if uploaded_file is not None:
     
     # Display the class probabilities in a table without index
     st.write("Class Probabilities:")
-    st.dataframe(class_probabilities_df, width=800, height=400, use_container_width=True)
+    st.dataframe(class_probabilities_df, width=1000, height=400, use_container_width=True)
