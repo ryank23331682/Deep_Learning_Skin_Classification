@@ -81,7 +81,7 @@ if uploaded_file is not None:
     st.write("")
     st.write("Classifying...")
 
-    # Predict the image
+  # Predict the image
     class_label, class_probabilities = predict(image)
     # Display the predicted class label
     st.write(f"Predicted Class: {class_info[class_label]['full_word']}")
@@ -89,13 +89,7 @@ if uploaded_file is not None:
     # Convert the class probabilities dictionary to a DataFrame
     class_probabilities_df = pd.DataFrame(list(class_probabilities.items()), columns=['Class Abbreviation', 'Probability'])
     
-    # Map the abbreviations to full words and descriptions
-    class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
-    class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
-
-    # Map the abbreviations to full words and descriptions
-    class_probabilities_df.index.name = 'Class Abbreviation'
-    class_probabilities_df.reset_index(inplace=True)
+    # Add Full Word and Description columns
     class_probabilities_df['Full Word'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['full_word'])
     class_probabilities_df['Description'] = class_probabilities_df['Class Abbreviation'].map(lambda x: class_info[x]['description'])
     
